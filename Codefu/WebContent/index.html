@@ -1,0 +1,96 @@
+<html>
+	<head><title></title>
+	
+		<!--JQUERY-->
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		
+		<!--TIC TAC TOE-->
+		<script src="scripts/tictactoe.js"></script>
+		
+		<!--CODE MIRROR-->
+		<script src="scripts/codemirror/codemirror.js"></script>
+		<link rel="stylesheet" href="styles/codemirror/codemirror.css">
+		<script src="scripts/codemirror/javascript.js"></script>
+		<script src="scripts/codemirror/runmode.js"></script>
+		<script src="scripts/codemirror/active-line.js"></script>
+		
+		<!--THIS PAGE-->
+		<script type="text/javascript">
+			$(document).on("ready", function(){
+			
+				//syntax highlighting
+				CodeMirror.runMode($("#pre-codeTxt").html(), "text/javascript",document.getElementById("pre-codeTxt"));
+				CodeMirror.runMode($("#post-codeTxt").html(), "text/javascript",document.getElementById("post-codeTxt"));
+				
+				//syntax highlighting on editor
+				var editor = CodeMirror.fromTextArea(document.getElementById("codeTxt"), {
+					lineNumbers: true,
+					styleActiveLine: true,
+					lineWrapping: true,
+					matchBrackets: true,
+					extraKeys: {"Enter": "newlineAndIndentContinueComment"}
+				});
+				editor.setSize(800,200);
+			
+				//run bot
+				$("#codeSubmitBtn").click(function(){
+					var t3 = new tictactoe();
+					var results = t3.run_bot($("#codeTxt").val());
+					$("#results").html("Results:<br/>" + results);
+				});
+				
+			});
+		</script>
+		
+		<style type="text/css">
+			.CodeMirror {border: 1px solid black;}
+			.CodeMirror-activeline-background {background: #e8f2ff !important;}
+    	</style>
+		
+	</head>
+	<body>
+	
+		<div>
+			<h3>Create a Tic Tac Toe BOT:</h3>
+			<p>
+				...
+			</p>
+		</div>
+	
+		<div>
+			<h3>Enter your code here: </h3>
+			<p id="pre-codeTxt" class="cm-s-default" style="font-family:'Lucida Console'; font-size:12">
+// FUNCTION THAT MAKES A MOVE
+
+// PARAMETERS:
+// - token: player the bot is player, 'x' or 'o'
+// - board: current state of the board, e.g. '****x***o' represents a board with 'x' in the center and 'o' in the bottom right corner
+
+// RETURNS:
+// - new_board: board with the new move, e.g. '****x*x*o'
+
+function get_next_move(token, board){
+			</p>
+			<textarea id="codeTxt" style="font-family:inherit; font-size:inherit">
+//replace this sample code with your own code!
+//sample code: a dumb AI that places its token in any random spot that is empty
+var retry = true;
+while(retry){
+  var tryPos = Math.floor(Math.random() * 9);
+  if(board[tryPos] == '*'){
+    new_board = board.substr(0, tryPos) + token + board.substr(tryPos + 1);
+    retry = false;
+  }
+}
+			</textarea>
+			<p id="post-codeTxt" class="cm-s-default" style="font-family:'Lucida Console'; font-size:12">			
+return new_board;
+}
+			</p>
+			<input id="codeSubmitBtn" type="submit" value="Run"/>
+		</div>
+		<br/>
+		<div id="results"></div>
+		
+	</body>
+</html>
