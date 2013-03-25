@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Battle &middot; Code Kungfu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Create your AI and duel with the other player.">
+    <meta name="author" content="Indra Adam">
+
+    <!-- Le styles -->
+    <link href="./bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="./bootstrap/css/codemirror.css">
+    <style type="text/css">
+			.CodeMirror {border: 1px solid black;}
+			.CodeMirror-activeline-background {background: #e8f2ff !important;}
+    	</style>
+    <style type="text/css">
+      body {
+        padding-top: 40px;
+        padding-bottom: 0px;
+      }
+    </style>
+    <link href="./bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="icon" href="./bootstrap/img/favicon.png" type="image/png" />
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand logo" href="./codeKungfu.html">Code Kungfu</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li><a href="./Battle.html" class="active">Battle</a></li>
+              <li><a href="./scoreboard.html">Leader Board</a></li>
+            </ul>
+			<ul class="nav pull-right">
+				<li><a href="" data-toggle="modal" data-target="#myModal">Sign in</a></li>
+			</ul>
+              <!--<button type="button" class="btn btn pull-right" data-toggle="modal" data-target="#myModal">Sign in</button>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+	<!-- Modal -->
+	<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  		<div class="modal-header">
+    		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    		<h3 class="modaltemp">Sign in</h3>
+  		</div>
+  		<div class="modal-body">
+  			<button class="btn btn-primary">Connect with Facebook</button>
+			<!--<form class="form-horizontal">
+				<div class="control-group">
+					<label class="control-label" for="inputEmail">Email</label>
+					<div class="controls">
+						<input type="text" id="inputEmail" placeholder="Email">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="inputPassword">Password</label>
+					<div class="controls">
+						<input type="password" id="inputPassword" placeholder="Password">
+					</div>
+				</div>
+			</form>
+  		</div>
+		<div class="modal-footer">
+			<button class="btn btn-primary">Connect with Facebook</button>
+			<button class="btn btn-primary">Sign in</button>
+			<button class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#signupModal">Sign up</button>-->
+		</div>
+	</div>
+	<!-- Sign Up Modal
+	<div id="signupModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  		<div class="modal-header">
+    		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    		<h3 class="modaltemp">Register</h3>
+  		</div>
+  		<div class="modal-body">
+    		<form class="form-horizontal">
+				<div class="control-group">
+					<label class="control-label" for="inputName">Full Name</label>
+					<div class="controls">
+						<input type="text" id="inputName" placeholder="Full Name">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="inputUsername">Username</label>
+					<div class="controls">
+						<input type="text" id="inputUsername" placeholder="Username">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="inputEmail">Email</label>
+					<div class="controls">
+						<input type="text" id="inputEmail" placeholder="Email">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="inputPassword">Password</label>
+					<div class="controls">
+						<input type="password" id="inputPassword" placeholder="Password">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="inputConfirmPassword">Confirm Password</label>
+					<div class="controls">
+						<input type="password" id="inputConfirmPassword" placeholder="Confirm Password">
+					</div>
+				</div>
+			</form>
+  		</div>
+		<div class="modal-footer">
+			<button class="btn btn-primary">Sign up</button>-->
+		</div>
+	</div>
+    <div class="container">
+    	<div class="hero-unit span2">
+    		<h1>Battle</h1>
+    	</div>
+    	<div class="span6 pull-right profile">
+    		<img class="pull-right" src="./bootstrap/img/missing.png" width="25%" height="25%"/>
+    		<h3 class="text-right">Anonymous&nbsp;&nbsp;</h3>
+  			<p class="lead text-right">Level: 0&nbsp;&nbsp;<br>Score: 0&nbsp;&nbsp;</p> 			
+    	</div>
+    </div> <!-- /container -->
+
+	<div class="container">
+	    <div class="span4">
+	    	<table class="table table-bordered ttttable">
+	    		<tr height="100px"><td id="1"></td><td id="2"></td><td id="3"></td></tr>
+	    		<tr height="100px"><td id="4"></td><td id="5"></td><td id="6"></td></tr>
+	    		<tr height="100px"><td id="7"></td><td id="8"></td><td id="9"></td></tr>
+			</table>
+			<ul class="pager">
+  				<li class="previous"><a href="#">&larr;</a></li>
+  				<li class="next"><a href="#">&rarr;</a></li>
+			</ul>
+			<div id="outcome"></div>
+		</div>
+		<div class="span7">
+			<ul class="nav nav-tabs">
+  			<li class="active"><a href="">Tic Tac Toe</a></li>
+  			<!--<li><a href="">Gomoku</a></li>-->
+			</ul>
+			<textarea id="codeTxt" rows="15" class="span7 playarea">
+//replace this sample code with your own code!
+//sample code: a dumb AI that places its token in any random spot that is empty
+var retry = true;
+while(retry){
+  var tryPos = Math.floor(Math.random() * 9);
+  if(board[tryPos] == '*'){
+    new_board = board.substr(0, tryPos) + token + board.substr(tryPos + 1);
+    retry = false;
+  }
+}
+			</textarea>
+			<br/>
+			<div class="pull-right">
+				<button class="btn btn-success disabled">Submit</button>
+				<div class="btn-group dropup">
+					<button class="btn btn-warning" id="codeSubmitBtn">Test</button>
+  					<button class="btn dropdown-toggle btn-warning" data-toggle="dropdown"><span class="caret"></span></button>
+  					<ul class="dropdown-menu">
+						<li><a tabindex="-1" href="">Easy</a></li>
+						<li><a tabindex="-1" href="">Medium</a></li>
+						<li><a tabindex="-1" href="">Hard</a></li>
+  					</ul>
+  				</div>
+				<button class="btn btn-danger">Reset</button>
+				<button class="btn">Save</button>
+			</div>
+		</div>
+	</div>
+	&nbsp;&nbsp;
+	<div class="container">
+		<div class="span1"></div>
+		<div class="span9 alert">
+  			<button type="button" class="close" data-dismiss="alert">&times;</button>
+  			<strong>You are not signed in!</strong> Sign in to participate in tournament and have your score registered.
+		</div>
+	</div>
+    <br/>
+    <div id="results"></div>
+    <div class="footerblock">
+    	<div class="container">
+    		<div class="span3">
+    			<a class="cleanlink" target="blank" href="http://smu.edu.sg">Singapore Management University</a>
+    		</div>
+			<div class="span8 pull-right"></div>
+    		<div class="span1 pull-right">
+				<a class="cleanlink" href="./aboutus.html">About Us</a>
+			</div>
+    	</div>
+    </div>
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="./bootstrap/js/jquery.js"></script>
+    <script src="./bootstrap/js/bootstrap.js"></script>
+    <!--CODE MIRROR-->
+	<script src="./bootstrap/js/codemirror/codemirror.js"></script>
+	<script src="./bootstrap/js/codemirror/javascript.js"></script>
+	<script src="./bootstrap/js/codemirror/runmode.js"></script>
+	<script src="./bootstrap/js/codemirror/active-line.js"></script>
+	<script src="./bootstrap/js/tictactoe.js"></script>
+	<script type="text/javascript">
+			$(document).on("ready", function(){
+			
+				//syntax highlighting
+				//CodeMirror.runMode($("#pre-codeTxt").html(), "text/javascript",document.getElementById("pre-codeTxt"));
+				//CodeMirror.runMode($("#post-codeTxt").html(), "text/javascript",document.getElementById("post-codeTxt"));
+				
+				//syntax highlighting on editor
+				var editor = CodeMirror.fromTextArea(document.getElementById("codeTxt"), {
+					lineNumbers: true,
+					styleActiveLine: true,
+					lineWrapping: true,
+					matchBrackets: true,
+					extraKeys: {"Enter": "newlineAndIndentContinueComment"}
+				});
+				//editor.setSize(800,200);
+			
+				//run bot
+				$("#codeSubmitBtn").click(function(){
+					var t3 = new tictactoe();
+					var results = t3.run_bot($("#codeTxt").val());
+					//$("#results").html("Results:<br/>" + results);
+					var splittedResults = results.split(",");
+					var lastFrameIndex = splittedResults.length-3;
+					var lastFrame = splittedResults[lastFrameIndex];//get the last frame of the game
+					var outcome = results[12];//get the outcome
+					var xPlayer = splittedResults[lastFrameIndex + 1];//get the x player
+					var oPlayer = splittedResults[lastFrameIndex + 2];//get the o player
+					if(outcome === xPlayer[1]){
+						if(xPlayer[5] === "h"){
+							$("#outcome").html("<div class='alert alert-success'><strong>You Win!</strong></div>");
+						}else{
+							$("#outcome").html("<div class='alert alert-danger'><strong>You Lose!</strong></div>");
+						}
+					}else if(outcome==="-"){
+						$("#outcome").html("<div class='alert alert-info'><strong>Draw!</strong></div>");
+					}else{
+						if(oPlayer[5] === "h"){
+							$("#outcome").html("<div class='alert alert-success'><strong>You Win!</strong></div>");
+						}else{
+							$("#outcome").html("<div class='alert alert-danger'><strong>You Lose!</strong></div>");
+						}
+					}
+					for (var i=1;i<10;i++){
+						$("#"+i).html(lastFrame[i]);//print the outcome into the html table
+					}
+				});
+			});
+		</script>
+  </body>
+</html>
