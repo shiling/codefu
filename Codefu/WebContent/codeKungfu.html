@@ -1,63 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Code Kungfu</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Create your AI and duel with the other player.">
-    <meta name="author" content="Indra Adam">
+<head>
+<meta charset="utf-8">
+<title>Code Kungfu</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description"
+	content="Create your AI and duel with the other player.">
+<meta name="author" content="Indra Adam">
 
-    <!-- Le styles -->
-    <link href="./styles/bootstrap.css" rel="stylesheet">
-    <style type="text/css">
-      body {
-        padding-top: 40px;
-        padding-bottom: 0px;
-      }
-    </style>
-    <link href="./styles/bootstrap-responsive.min.css" rel="stylesheet">
+<!-- Le styles -->
+<link href="./styles/bootstrap.css" rel="stylesheet">
+<style type="text/css">
+body {
+	padding-top: 40px;
+	padding-bottom: 0px;
+}
+</style>
+<link href="./styles/bootstrap-responsive.min.css" rel="stylesheet">
 
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <!-- Fav and touch icons -->
-    <link rel="icon" href="./img/favicon.png" type="image/png" />
-  </head>
+<!-- Fav and touch icons -->
+<link rel="icon" href="./img/favicon.png" type="image/png" />
 
-  <body>
+<!-- Google Analytics -->
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push([ '_setAccount', 'UA-39614464-1' ]);
+	_gaq.push([ '_trackPageview' ]);
 
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand logo active" href="./codeKungfu.html">Code Kungfu</a>
-          <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li><a href="./Battle.html">Battle</a></li>
-              <li><a href="./scoreboard.html">Leader Board</a></li>
-            </ul>
-			<ul class="nav pull-right">
-				<li><a href="" data-toggle="modal" data-target="#myModal">Sign in</a></li>
-			</ul>
-              <!--<button type="button" class="btn btn pull-right" data-toggle="modal" data-target="#myModal">Sign in</button>-->
-          </div><!--/.nav-collapse -->
-        </div>
-      </div>
-    </div>
+	(function() {
+		var ga = document.createElement('script');
+		ga.type = 'text/javascript';
+		ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+				: 'http://www')
+				+ '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+</head>
+
+<body>
+
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="btn btn-navbar" data-toggle="collapse"
+					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span>
+				</a> <a class="brand logo active" href="./codeKungfu.html">Code
+					Kungfu</a>
+				<div class="nav-collapse collapse">
+					<ul class="nav">
+						<li><a href="./Battle.html">Battle</a></li>
+						<li><a href="./scoreboard.html">Leader Board</a></li>
+					</ul>
+					<ul class="nav pull-right">
+						<li><a href="" data-toggle="modal" data-target="#myModal">Sign
+								in</a></li>
+					</ul>
+					<!--<button type="button" class="btn btn pull-right" data-toggle="modal" data-target="#myModal">Sign in</button>-->
+				</div>
+				<!--/.nav-collapse -->
+			</div>
+		</div>
+	</div>
 	<!-- Modal -->
-	<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  		<div class="modal-header">
-    		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    		<h3 class="modaltemp">Sign in</h3>
-  		</div>
-  		<div class="modal-body">
-  			<button class="btn btn-primary">Connect with Facebook</button>
+	<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"
+				aria-hidden="true">&times;</button>
+			<h3 class="modaltemp">Sign in</h3>
+		</div>
+		<div class="modal-body">
+			<button class="btn btn-primary">Connect with Facebook</button>
 			<!--<form class="form-horizontal">
 				<div class="control-group">
 					<label class="control-label" for="inputEmail">Email</label>
@@ -123,21 +145,27 @@
 			<button class="btn btn-primary">Sign up</button>
 		</div>
 	</div>-->
-    
-    <div class="container">
-      	<div class="hero-unit span4">
-        	<h1 class="title">Train your coding skill</h1><br/>
-        	<p class="lead">Welcome to a cyber colosseum where your AI will fight each other until the last drop of code. </p>
-        	<p><a href="./Battle.html" class="btn btn-success btn-large">Let the Battle Begins &raquo;</a></p>
-      	</div>
+
+	<div class="container">
+		<div class="hero-unit span4">
+			<h1 class="title">Train your coding skill</h1>
+			<br />
+			<p class="lead">Welcome to a cyber colosseum where your AI will
+				fight each other until the last drop of code.</p>
+			<p>
+				<a href="./Battle.html" class="btn btn-success btn-large">Let
+					the Battle Begins &raquo;</a>
+			</p>
+		</div>
 		<div class="span5">
 			<div class="maintext span5">
 				<pre>Hi there, welcome to Code Kungfu! 
-				<br>Let's start by doing simple game.</br></pre>
+				<br>Let's start by doing simple game.</br>
+				</pre>
 				<textarea rows="7" class="span5 borderless">></textarea>
 			</div>
 		</div>
-      <!-- Example row of columns
+		<!-- Example row of columns
       <div class="row">
         <div class="span6">
           <h2>Versus Computer</h2>
@@ -155,53 +183,53 @@
           </p>
           <p><a class="btn" href="#">Let's Play &raquo;</a></p>
        </div>-->
-        
-    </div> <!-- /container -->
-    &nbsp;
-    <br/><br/>
-    <div class="separatorline">
-    </div>
-    <div class="infoblock">
-    <div class="container">
-    	<div class="span2"></div>
-    	<div class="span2 maininfo1">
-    		<img src="./img/computer1.png" width="82%" height="82%"/>
-    		<h4>Versus Computer</h4>
-          	<p>Try and defeat our super Tic Tac Toe AI, if you can.
-          	</p>
-    	</div>
-    	<div class="span1"></div>
-    	<div class="span2 maininfo">
-    		<!--<img src="./bootstrap/img/player.png" width="50%" height="50%"/><br/>-->
-    		<img src="./img/player.png" width="90%" height="90%"/>
-    		<h4>Versus Player</h4>
-          	<p>Play against the other players from all around the world.
-          	</p>
-    	</div>
-    	<div class="span1"></div>
-    	<div class="span2 maininfo">
-	    	<img src="./img/star2.png" width="90%" height="90%"/>
-    		<h4>Leader Board</h4>
-          	<p>Climb up the leader board to be the Tic Tac Toe master.
-          	</p>
-    	</div>
-    	<div class="span2"></div>
-    </div>
-    </div>
-    <div class="footerblock">
-    	<div class="container">
+
+	</div>
+	<!-- /container -->
+	&nbsp;
+	<br />
+	<br />
+	<div class="separatorline"></div>
+	<div class="infoblock">
+		<div class="container">
+			<div class="span2"></div>
+			<div class="span2 maininfo1">
+				<img src="./img/computer1.png" width="82%" height="82%" />
+				<h4>Versus Computer</h4>
+				<p>Try and defeat our super Tic Tac Toe AI, if you can.</p>
+			</div>
+			<div class="span1"></div>
+			<div class="span2 maininfo">
+				<!--<img src="./bootstrap/img/player.png" width="50%" height="50%"/><br/>-->
+				<img src="./img/player.png" width="90%" height="90%" />
+				<h4>Versus Player</h4>
+				<p>Play against the other players from all around the world.</p>
+			</div>
+			<div class="span1"></div>
+			<div class="span2 maininfo">
+				<img src="./img/star2.png" width="90%" height="90%" />
+				<h4>Leader Board</h4>
+				<p>Climb up the leader board to be the Tic Tac Toe master.</p>
+			</div>
+			<div class="span2"></div>
+		</div>
+	</div>
+	<div class="footerblock">
+		<div class="container">
 			<div class="span3 pull-left">
-				<a class="cleanlink" target="blank" href="http://smu.edu.sg">Singapore Management University</a></div>
+				<a class="cleanlink" target="blank" href="http://smu.edu.sg">Singapore
+					Management University</a>
+			</div>
 			<div class="span8 pull-right"></div>
-    		<div class="span1 pull-right">
+			<div class="span1 pull-right">
 				<a class="cleanlink" href="./aboutus.html">About Us</a>
 			</div>
-    	</div>
-    </div>
-    <!-- Le javascript
+		</div>
+	</div>
+	<!-- Le javascript
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="./scripts/jquery.js"></script>
-    <script src="./scripts/bootstrap.min.js"></script>
-  </body>
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="./scripts/jquery.js"></script>
+	<script src="./scripts/bootstrap.min.js"></script>
+</body>
 </html>
