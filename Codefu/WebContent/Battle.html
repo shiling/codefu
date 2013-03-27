@@ -203,7 +203,7 @@ return new_board;
             </p>
 			<br />
 			<div class="pull-right">
-				<button class="btn btn-success disabled">Submit</button>
+				<button class="btn btn-success" id="submitBtn">Submit</button>
 				<div class="btn-group dropup">
 					<button class="btn btn-warning" id="testBtn">Test</button>
 					<button class="btn dropdown-toggle btn-warning"
@@ -275,7 +275,7 @@ return new_board;
         //test bot
         var testBot = function() {
             var t3 = new tictactoe();
-            var results = $.parseJSON(t3.run_bot($("#codeTxt").val()));
+            var results = $.parseJSON(t3.run_bot(editor.getValue()));
             displayResults(results);
         }
         
@@ -316,17 +316,34 @@ return new_board;
         	}
         }
         
+        //save bot
         var saveBot = function(){
-            console.log('saving...');
             $.ajax({
             	url: '/Codefu/ttt/save',
             	type: 'post',
             	data: {
-                    code: $("#codeTxt").val()
+            		email: 'shiling.tai@outlook.com',    //TODO: integrate with fb log in
+                    code: editor.getValue()
             	},
             	success: function(data){
             	    console.log('saved. response: ' + data);
             	}
+            });
+        }
+        
+        //submit bot for tournament
+        var submitBot = function(){
+            $.ajax({
+                url: '/Codefu/ttt/save',
+                type: 'post',
+                data: {
+                    email: 'shiling.tai@outlook.com',    //TODO: integrate with fb log in
+                    code: editor.getValue(),
+                    participate: true
+                },
+                success: function(data){
+                    console.log('saved. response: ' + data);
+                }
             });
         }
         
@@ -335,6 +352,7 @@ return new_board;
         $("#previous").on('click', function(){displayHistory(-1)});
         $("#next").on('click', function(){displayHistory(1)});
         $('#saveBtn').on('click', saveBot);
+        $('#submitBtn').on('click', submitBot);
         
         //Google Analytics
         var _gaq = _gaq || [];

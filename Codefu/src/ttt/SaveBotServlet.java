@@ -8,6 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import db.TTTBotManager;
+
+import models.TTTBot;
+
 /**
  * Servlet implementation class SaveBotServlet
  */
@@ -34,11 +38,38 @@ public class SaveBotServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+
+		//get params
+		String email = request.getParameter("email");
+		String code = request.getParameter("code");
+		String participate = request.getParameter("participate");
 		
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		out.println("<html><head><title>Hello World!</title></head>");
-		out.println("<body><h1>Hello World!</h1></body></html>");
+		//create bot
+		TTTBot bot = new TTTBot();
+		bot.setUserEmail(email);
+		bot.setCode(code);
+		if(participate!=null && participate.equals("true")){
+			bot.setParticipating(true);
+		}else{
+			bot.setParticipating(false);
+		}
+		
+		//save bot
+		TTTBotManager tttBotMgr = new TTTBotManager();
+		try{
+			
+			tttBotMgr.SaveBot(bot);
+			
+			//send ok response
+			response.setStatus(HttpServletResponse.SC_OK);
+			
+		}catch(Exception e){
+			
+			//send error response
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			
+		}
+		
 	}
 
 }
