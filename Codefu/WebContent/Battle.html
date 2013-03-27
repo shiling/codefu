@@ -1,58 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<title>Battle &middot; Code Kungfu</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description"
-	content="Create your AI and duel with the other player.">
-<meta name="author" content="Indra Adam">
-
-<!-- Le styles -->
-<link href="./styles/bootstrap.css" rel="stylesheet">
-<link rel="stylesheet" href="./styles/codemirror/codemirror.css">
-<style type="text/css">
-.CodeMirror {
-	border: 1px solid black;
-}
-
-.CodeMirror-activeline-background {
-	background: #e8f2ff !important;
-}
-</style>
-<style type="text/css">
-body {
-	padding-top: 40px;
-	padding-bottom: 0px;
-}
-</style>
-<link href="./styles/bootstrap-responsive.min.css" rel="stylesheet">
-
-<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-<!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-<!-- Fav and touch icons -->
-<link rel="icon" href="./img/favicon.png" type="image/png" />
-
-<!-- Google Analytics -->
-<script type="text/javascript">
-	var _gaq = _gaq || [];
-	_gaq.push([ '_setAccount', 'UA-39614464-1' ]);
-	_gaq.push([ '_trackPageview' ]);
-
-	(function() {
-		var ga = document.createElement('script');
-		ga.type = 'text/javascript';
-		ga.async = true;
-		ga.src = ('https:' == document.location.protocol ? 'https://ssl'
-				: 'http://www')
-				+ '.google-analytics.com/ga.js';
-		var s = document.getElementsByTagName('script')[0];
-		s.parentNode.insertBefore(ga, s);
-	})();
-</script>
+	<meta charset="utf-8">
+	<title>Battle &middot; Code Kungfu</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description"
+		content="Create your AI and duel with the other player.">
+	<meta name="author" content="Indra Adam">
+	
+	<!-- Styles -->
+	<link rel="stylesheet" href="./styles/bootstrap.css" >
+    <link rel="stylesheet" href="./styles/bootstrap-responsive.min.css">
+	<link rel="stylesheet" href="./styles/codemirror/codemirror.css">
+    <link rel="icon" href="./img/favicon.png" type="image/png" />
+	<style type="text/css">
+		body {
+	        padding-top: 40px;
+	        padding-bottom: 0px;
+	    }
+		.CodeMirror {
+			border: 1px solid black;
+		}
+		
+		.CodeMirror-activeline-background {
+			background: #e8f2ff !important;
+		}
+	</style>
+	
 </head>
 
 <body>
@@ -171,34 +146,45 @@ body {
 
 	<div class="container">
 		<div class="span4">
-			<table class="table table-bordered ttttable">
+			<table id="board" class="table table-bordered ttttable">
 				<tr height="100px">
+					<td id="0"></td>
 					<td id="1"></td>
 					<td id="2"></td>
-					<td id="3"></td>
 				</tr>
 				<tr height="100px">
+					<td id="3"></td>
 					<td id="4"></td>
 					<td id="5"></td>
-					<td id="6"></td>
 				</tr>
 				<tr height="100px">
+					<td id="6"></td>
 					<td id="7"></td>
 					<td id="8"></td>
-					<td id="9"></td>
 				</tr>
 			</table>
 			<ul class="pager">
-				<li class="previous"><a href="#">&larr;</a></li>
-				<li class="next"><a href="#">&rarr;</a></li>
+				<li id="previous" class="previous"><a href="#">&larr;</a></li>
+				<li id="next" class="next"><a href="#">&rarr;</a></li>
 			</ul>
 			<div id="outcome"></div>
 		</div>
 		<div class="span7">
 			<ul class="nav nav-tabs">
 				<li class="active"><a href="">Tic Tac Toe</a></li>
-				<!--<li><a href="">Gomoku</a></li>-->
 			</ul>
+            <p id="pre-codeTxt" class="cm-s-default" style="font-family:'Lucida Console'; font-size:12">
+// FUNCTION THAT MAKES A MOVE
+
+// PARAMETERS:
+// - token: player the bot is player, 'x' or 'o'
+// - board: current state of the board, e.g. '****x***o' represents a board with 'x' in the center and 'o' in the bottom right corner
+
+// RETURNS:
+// - new_board: board with the new move, e.g. '****x*x*o'
+
+function get_next_move(token, board){
+            </p>
 			<textarea id="codeTxt" rows="15" class="span7 playarea">
 //replace this sample code with your own code!
 //sample code: a dumb AI that places its token in any random spot that is empty
@@ -211,11 +197,15 @@ while(retry){
   }
 }
 			</textarea>
+			<p id="post-codeTxt" class="cm-s-default" style="font-family:'Lucida Console'; font-size:12">            
+return new_board;
+}
+            </p>
 			<br />
 			<div class="pull-right">
 				<button class="btn btn-success disabled">Submit</button>
 				<div class="btn-group dropup">
-					<button class="btn btn-warning" id="codeSubmitBtn">Test</button>
+					<button class="btn btn-warning" id="testBtn">Test</button>
 					<button class="btn dropdown-toggle btn-warning"
 						data-toggle="dropdown">
 						<span class="caret"></span>
@@ -227,7 +217,7 @@ while(retry){
 					</ul>
 				</div>
 				<button class="btn btn-danger">Reset</button>
-				<button class="btn">Save</button>
+				<button class="btn" id="saveBtn">Save</button>
 			</div>
 		</div>
 	</div>
@@ -254,86 +244,115 @@ while(retry){
 			</div>
 		</div>
 	</div>
-	<!-- Le javascript
-    ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="./scripts/jquery.js"></script>
-	<script src="./scripts/bootstrap.min.js"></script>
-	<!--CODE MIRROR-->
-	<script src="./scripts/codemirror/codemirror.js"></script>
-	<script src="./scripts/codemirror/javascript.js"></script>
-	<script src="./scripts/codemirror/runmode.js"></script>
-	<script src="./scripts/codemirror/active-line.js"></script>
-	<script src="./scripts/tictactoe.js"></script>
-	<script type="text/javascript">
-		$(document)
-				.on(
-						"ready",
-						function() {
 
-							//syntax highlighting
-							//CodeMirror.runMode($("#pre-codeTxt").html(), "text/javascript",document.getElementById("pre-codeTxt"));
-							//CodeMirror.runMode($("#post-codeTxt").html(), "text/javascript",document.getElementById("post-codeTxt"));
-
-							//syntax highlighting on editor
-							var editor = CodeMirror.fromTextArea(document
-									.getElementById("codeTxt"), {
-								lineNumbers : true,
-								styleActiveLine : true,
-								lineWrapping : true,
-								matchBrackets : true,
-								extraKeys : {
-									"Enter" : "newlineAndIndentContinueComment"
-								}
-							});
-							//editor.setSize(800,200);
-
-							//run bot
-							$("#codeSubmitBtn")
-									.click(
-											function() {
-												var t3 = new tictactoe();
-												var results = t3.run_bot($(
-														"#codeTxt").val());
-												//$("#results").html("Results:<br/>" + results);
-												var splittedResults = results
-														.split(",");
-												var lastFrameIndex = splittedResults.length - 3;
-												var lastFrame = splittedResults[lastFrameIndex];//get the last frame of the game
-												var outcome = results[12];//get the outcome
-												var xPlayer = splittedResults[lastFrameIndex + 1];//get the x player
-												var oPlayer = splittedResults[lastFrameIndex + 2];//get the o player
-												if (outcome === xPlayer[1]) {
-													if (xPlayer[5] === "h") {
-														$("#outcome")
-																.html(
-																		"<div class='alert alert-success'><strong>You Win!</strong></div>");
-													} else {
-														$("#outcome")
-																.html(
-																		"<div class='alert alert-danger'><strong>You Lose!</strong></div>");
-													}
-												} else if (outcome === "-") {
-													$("#outcome")
-															.html(
-																	"<div class='alert alert-info'><strong>Draw!</strong></div>");
-												} else {
-													if (oPlayer[5] === "h") {
-														$("#outcome")
-																.html(
-																		"<div class='alert alert-success'><strong>You Win!</strong></div>");
-													} else {
-														$("#outcome")
-																.html(
-																		"<div class='alert alert-danger'><strong>You Lose!</strong></div>");
-													}
-												}
-												for ( var i = 1; i < 10; i++) {
-													$("#" + i).html(
-															lastFrame[i]);//print the outcome into the html table
-												}
-											});
-						});
-	</script>
+    <!-- Scripts -->
+    
+    <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script src="./scripts/jquery.js"></script>
+    <script src="./scripts/bootstrap.min.js"></script>
+    <script src="./scripts/codemirror/codemirror.js"></script>
+    <script src="./scripts/codemirror/javascript.js"></script>
+    <script src="./scripts/codemirror/runmode.js"></script>
+    <script src="./scripts/codemirror/active-line.js"></script>
+    <script src="./scripts/tictactoe.js"></script>
+    <script type="text/javascript">
+            
+		//syntax highlighting
+		CodeMirror.runMode($("#pre-codeTxt").html(), "text/javascript",document.getElementById("pre-codeTxt"));
+		CodeMirror.runMode($("#post-codeTxt").html(), "text/javascript",document.getElementById("post-codeTxt"));
+        
+        //syntax highlighting on editor
+        var editor = CodeMirror.fromTextArea(document.getElementById("codeTxt"), {
+            lineNumbers : true,
+            styleActiveLine : true,
+            lineWrapping : true,
+            matchBrackets : true,
+            extraKeys : {
+                "Enter" : "newlineAndIndentContinueComment"
+            }
+        });
+        
+        //test bot
+        var testBot = function() {
+            var t3 = new tictactoe();
+            var results = $.parseJSON(t3.run_bot($("#codeTxt").val()));
+            displayResults(results);
+        }
+        
+        //display results of test bot
+        var displayResults = function(results){
+        	
+        	//display last history
+        	$("#board").data('history',results.history);
+        	displayHistory();
+        	
+        	//display outcome message
+        	if(results.outcome==='-'){
+                $("#outcome").html("<div class='alert alert-success'><strong>You Win!</strong></div>");
+        	}else if((results.outcome==='x' && results.x==='human') || (results.outcome==='o' && results.o==='human')){
+                $("#outcome").html("<div class='alert alert-info'><strong>Draw!</strong></div>");
+        	}else{
+                $("#outcome").html("<div class='alert alert-danger'><strong>You Lose!</strong></div>");
+       		   
+        	}
+        }
+        
+        //display history
+        var displayHistory = function(offset){
+        	//set index
+        	var index;
+        	if(!offset){
+        		var index = $("#board").data('history').length-1; //last
+                $("#board").data('index', index);
+        	}else{
+                var index = $("#board").data('index') + offset;
+                $("#board").data('index', index);
+        	}
+        	
+        	//display
+        	var state = $("#board").data('history')[index];
+        	for(var pos=0; pos<9; pos++){
+                $("#"+pos).html(state[pos]==='*'?'':state[pos]);
+        	}
+        }
+        
+        var saveBot = function(){
+            console.log('saving...');
+            $.ajax({
+            	url: '/Codefu/ttt/save',
+            	type: 'post',
+            	data: {
+                    code: $("#codeTxt").val()
+            	},
+            	success: function(data){
+            	    console.log('saved. response: ' + data);
+            	}
+            });
+        }
+        
+        //event listeners
+        $("#testBtn").on('click', testBot);
+        $("#previous").on('click', function(){displayHistory(-1)});
+        $("#next").on('click', function(){displayHistory(1)});
+        $('#saveBtn').on('click', saveBot);
+        
+        //Google Analytics
+        var _gaq = _gaq || [];
+        _gaq.push([ '_setAccount', 'UA-39614464-1' ]);
+        _gaq.push([ '_trackPageview' ]);
+    
+        (function() {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+                    : 'http://www')
+                    + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+        
+    </script>	
+	
 </body>
 </html>
