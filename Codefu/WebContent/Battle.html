@@ -64,88 +64,16 @@
 		</div>
 		<div class="modal-body">
 			<button class="btn btn-primary">Connect with Facebook</button>
-			<!--<form class="form-horizontal">
-				<div class="control-group">
-					<label class="control-label" for="inputEmail">Email</label>
-					<div class="controls">
-						<input type="text" id="inputEmail" placeholder="Email">
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label" for="inputPassword">Password</label>
-					<div class="controls">
-						<input type="password" id="inputPassword" placeholder="Password">
-					</div>
-				</div>
-			</form>
-  		</div>
-		<div class="modal-footer">
-			<button class="btn btn-primary">Connect with Facebook</button>
-			<button class="btn btn-primary">Sign in</button>
-			<button class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#signupModal">Sign up</button>-->
 		</div>
 	</div>
-	<!-- Sign Up Modal
-	<div id="signupModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  		<div class="modal-header">
-    		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    		<h3 class="modaltemp">Register</h3>
-  		</div>
-  		<div class="modal-body">
-    		<form class="form-horizontal">
-				<div class="control-group">
-					<label class="control-label" for="inputName">Full Name</label>
-					<div class="controls">
-						<input type="text" id="inputName" placeholder="Full Name">
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label" for="inputUsername">Username</label>
-					<div class="controls">
-						<input type="text" id="inputUsername" placeholder="Username">
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label" for="inputEmail">Email</label>
-					<div class="controls">
-						<input type="text" id="inputEmail" placeholder="Email">
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label" for="inputPassword">Password</label>
-					<div class="controls">
-						<input type="password" id="inputPassword" placeholder="Password">
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label" for="inputConfirmPassword">Confirm Password</label>
-					<div class="controls">
-						<input type="password" id="inputConfirmPassword" placeholder="Confirm Password">
-					</div>
-				</div>
-			</form>
-  		</div>
-		<div class="modal-footer">
-			<button class="btn btn-primary">Sign up</button>-->
+	
 	</div>
 	</div>
-	<div class="container">
-		<div class="hero-unit span2">
-			<h1>Battle</h1>
-		</div>
-		<div class="span6 pull-right profile">
-			<img class="pull-right" src="./img/missing.png" width="25%"
-				height="25%" />
-			<h3 class="text-right">Anonymous&nbsp;&nbsp;</h3>
-			<p class="lead text-right">
-				Level: 0&nbsp;&nbsp;<br>Score: 0&nbsp;&nbsp;
-			</p>
-		</div>
-	</div>
-	<!-- /container -->
-
 	<div class="container">
 		<div class="span4">
+			<div class="hero-unit span2">
+				<h1>Battle</h1>
+			</div>
 			<table id="board" class="table table-bordered ttttable">
 				<tr height="100px">
 					<td id="0"></td>
@@ -167,9 +95,11 @@
 				<li id="previous" class="previous"><a href="#">&larr;</a></li>
 				<li id="next" class="next"><a href="#">&rarr;</a></li>
 			</ul>
+			<div id="humanToken"></div>
 			<div id="outcome"></div>
-		</div>
+		</div>	
 		<div class="span7">
+		&nbsp;
 			<ul class="nav nav-tabs">
 				<li class="active"><a href="">Tic Tac Toe</a></li>
 			</ul>
@@ -204,9 +134,9 @@ return new_board;
 			<br />
 			<div class="pull-right">
 				<button class="btn btn-success" id="submitBtn">Submit</button>
-				<div class="btn-group dropup">
+				<!--<div class="btn-group dropup">-->
 					<button class="btn btn-warning" id="testBtn">Test</button>
-					<button class="btn dropdown-toggle btn-warning"
+					<!--<button class="btn dropdown-toggle btn-warning"
 						data-toggle="dropdown">
 						<span class="caret"></span>
 					</button>
@@ -215,12 +145,13 @@ return new_board;
 						<li><a tabindex="-1" href="">Medium</a></li>
 						<li><a tabindex="-1" href="">Hard</a></li>
 					</ul>
-				</div>
-				<button class="btn btn-danger">Reset</button>
+				</div>-->
+				<!--<button id="reseBtn" class="btn btn-danger">Reset</button>-->
 				<button class="btn" id="saveBtn">Save</button>
 			</div>
 		</div>
 	</div>
+	<!-- /container -->
 	&nbsp;&nbsp;
 	<div class="container">
 		<div class="span1"></div>
@@ -288,12 +219,17 @@ return new_board;
         	
         	//display outcome message
         	if(results.outcome==='-'){
-                $("#outcome").html("<div class='alert alert-success'><strong>You Win!</strong></div>");
+                $("#outcome").html("<div class='alert alert-warning'><strong>Draw!</strong></div>");
         	}else if((results.outcome==='x' && results.x==='human') || (results.outcome==='o' && results.o==='human')){
-                $("#outcome").html("<div class='alert alert-info'><strong>Draw!</strong></div>");
+                $("#outcome").html("<div class='alert alert-success'><strong>You Win!</strong></div>");
         	}else{
                 $("#outcome").html("<div class='alert alert-danger'><strong>You Lose!</strong></div>");
-       		   
+        	}
+        	
+        	if(results.x === 'human'){
+        		 $("#humanToken").html("<div class='alert alert-info center'><strong>You are X</strong></div>");
+        	}else{
+        		$("#humanToken").html("<div class='alert alert-info center'><strong>You are O</strong></div>");
         	}
         }
         
@@ -353,6 +289,7 @@ return new_board;
         $("#next").on('click', function(){displayHistory(1)});
         $('#saveBtn').on('click', saveBot);
         $('#submitBtn').on('click', submitBot);
+        $('#resetBtn').on('click', reset);
         
         //Google Analytics
         var _gaq = _gaq || [];
