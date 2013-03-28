@@ -78,7 +78,6 @@ body {
                         
                     } else {
                         //user is not connected to your app or logged out
-                        button.innerHTML = 'Login';
                         button.onclick = function() {
                             FB.login(function(response) {
                                 if (response.authResponse) {
@@ -111,6 +110,8 @@ body {
                     userName.innerHTML = info.name;
                     userEmail.innerHTML = info.email;
                     userPic.innerHTML = '<img src="https://graph.facebook.com/' + info.id + '/picture">';
+                    userEmail.style.display="none";
+                    signInButton.style.display="none";
                 }
             }
         
