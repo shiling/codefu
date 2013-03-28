@@ -52,6 +52,7 @@ body {
         <script type="text/javascript">
             var button;
             var signInButton;
+            var signInDialog;
             var userName;
             var userEmail;
             var userPic;
@@ -69,6 +70,7 @@ body {
                     userEmail = document.getElementById('user-email');
                     userPic = document.getElementById('user-picture');
                     signInButton = document.getElementById('signInBtn');
+                    signInDialog = document.getElementById('myModal');
                     
                     if (response.authResponse) {
                         //user is already logged in and connected
@@ -112,6 +114,7 @@ body {
                     userPic.innerHTML = '<img src="https://graph.facebook.com/' + info.id + '/picture">';
                     userEmail.style.display="none";
                     signInButton.style.display="none";
+                    /* signInDialog.style.display="none"; */
                 }
             }
         
@@ -134,7 +137,6 @@ body {
 						<li><a id="user-picture"></a></li>
 						<li><a id="user-name"></a></li>
 						<li><a id="user-email"></a></li>
-						
 						<li><a id="signInBtn" href="" data-toggle="modal" data-target="#myModal">Sign in</a></li>
 					</ul>
 				</div>
@@ -146,8 +148,7 @@ body {
 	<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal"
-				aria-hidden="true">&times;</button>
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			<h3 class="modaltemp">Sign in</h3>
 		</div>
 		<div class="modal-body">
