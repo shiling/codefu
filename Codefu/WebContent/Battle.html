@@ -37,7 +37,6 @@
         <script type="text/javascript">
             var button;
             var signInButton;
-            var signInDialog;
             var signInAlert;
             var userName;
             var userEmail;
@@ -56,7 +55,6 @@
                     userEmail = document.getElementById('user-email');
                     userPic = document.getElementById('user-picture');
                     signInButton = document.getElementById('signInBtn');
-                    signInDialog = document.getElementById('myModal');
                     signInAlert = document.getElementById('signInAlert');
                     
                     if (response.authResponse) {
@@ -101,7 +99,7 @@
                     userPic.innerHTML = '<img src="https://graph.facebook.com/' + info.id + '/picture">';
                     userEmail.style.display="none";
                     signInButton.style.display="none";
-                    /* signInDialog.style.display="none"; */
+                    $('#myModal').modal('hide');
                     signInAlert.style.display="none";
                 }
             }
