@@ -32,6 +32,82 @@
 
 <body>
 
+<!-- FB Login Button -->
+	<div id="fb-root"></div>
+        <script type="text/javascript">
+            var button;
+            var signInButton;
+            var signInDialog;
+            var signInAlert;
+            var userName;
+            var userEmail;
+            var userPic;
+            
+            window.fbAsyncInit = function() {
+                FB.init({ appId: '223110031167007', //change the appId to your appId
+                    status: true, 
+                    cookie: true,
+                    xfbml: true,
+                    oauth: true});
+
+               function updateButton(response) {
+                    button       =   document.getElementById('fb-auth');
+                    userName = document.getElementById('user-name');
+                    userEmail = document.getElementById('user-email');
+                    userPic = document.getElementById('user-picture');
+                    signInButton = document.getElementById('signInBtn');
+                    signInDialog = document.getElementById('myModal');
+                    signInAlert = document.getElementById('signInAlert');
+                    
+                    if (response.authResponse) {
+                        //user is already logged in and connected
+                        FB.api('/me', function(info) {
+                            login(response, info);
+                        });
+                        
+                    } else {
+                        //user is not connected to your app or logged out
+                        button.onclick = function() {
+                            FB.login(function(response) {
+                                if (response.authResponse) {
+                                    FB.api('/me', function(info) {
+                                        login(response, info);
+                                    });	   
+                                } else {
+                                    //user cancelled login or did not grant authorization
+                                }
+                            }, {scope:'email,user_about_me'});  	
+                        }
+                    }
+                }
+                
+                // run once with current status and whenever the status changes
+                FB.getLoginStatus(updateButton);
+                FB.Event.subscribe('auth.statusChange', updateButton);	
+            };
+            (function() {
+                var e = document.createElement('script'); e.async = true;
+                e.src = document.location.protocol 
+                    + '//connect.facebook.net/en_US/all.js';
+                document.getElementById('fb-root').appendChild(e);
+            }());
+            
+            
+            function login(response, info){
+                if (response.authResponse) {
+                    isLoggedIn = true;
+                    userName.innerHTML = info.name;
+                    userEmail.innerHTML = info.email;
+                    userPic.innerHTML = '<img src="https://graph.facebook.com/' + info.id + '/picture">';
+                    userEmail.style.display="none";
+                    signInButton.style.display="none";
+                    /* signInDialog.style.display="none"; */
+                    signInAlert.style.display="none";
+                }
+            }
+        
+        </script>
+
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
@@ -45,8 +121,10 @@
 						<li><a href="./scoreboard.html">Leader Board</a></li>
 					</ul>
 					<ul class="nav pull-right">
-						<li><a href="" data-toggle="modal" data-target="#myModal">Sign
-								in</a></li>
+						<li><a id="user-picture"></a></li>
+						<li><a id="user-name"></a></li>
+						<li><a id="user-email"></a></li>
+						<li><a id="signInBtn" href="" data-toggle="modal" data-target="#myModal">Sign in</a></li>
 					</ul>
 					<!--<button type="button" class="btn btn pull-right" data-toggle="modal" data-target="#myModal">Sign in</button>-->
 				</div>
@@ -63,7 +141,7 @@
 			<h3 class="modaltemp">Sign in</h3>
 		</div>
 		<div class="modal-body">
-			<button class="btn btn-primary">Connect with Facebook</button>
+			<button id="fb-auth" class="btn btn-primary">Connect with Facebook</button>
 		</div>
 	</div>
 	
@@ -155,7 +233,7 @@ return new_board;
 	&nbsp;&nbsp;
 	<div class="container">
 		<div class="span1"></div>
-		<div class="span9 alert">
+		<div id="signInAlert" class="span9 alert">
 			<button type="button" class="close" data-dismiss="alert">&times;</button>
 			<strong>You are not signed in!</strong> Sign in to participate in
 			tournament and have your score registered.
