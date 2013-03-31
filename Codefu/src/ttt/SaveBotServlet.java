@@ -1,7 +1,6 @@
 package ttt;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,8 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import db.TTTBotManager;
+import db.UserManager;
 
 import models.TTTBot;
+import models.User;
 
 /**
  * Servlet implementation class SaveBotServlet
@@ -40,9 +41,15 @@ public class SaveBotServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		//get params
+		String username = request.getParameter("username");
 		String email = request.getParameter("email");
 		String code = request.getParameter("code");
 		String participate = request.getParameter("participate");
+		
+		//create user
+		User user = new User();
+		user.setName(username);
+		user.setEmail(email);
 		
 		//create bot
 		TTTBot bot = new TTTBot();
@@ -54,10 +61,13 @@ public class SaveBotServlet extends HttpServlet {
 			bot.setParticipating(false);
 		}
 		
-		//save bot
+		//create user if not exists and save bot
+		UserManager userMgr = new UserManager();
 		TTTBotManager tttBotMgr = new TTTBotManager();
+		
 		try{
 			
+			userMgr.CreateUserIfNotExist(user);
 			tttBotMgr.SaveBot(bot);
 			
 			//send ok response

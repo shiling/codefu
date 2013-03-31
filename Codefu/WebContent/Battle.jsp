@@ -191,7 +191,7 @@ return new_board;
         	}else{
         		$("#humanToken").html("<div class='alert alert-info center'><strong>You are O</strong></div>");
         	}
-        }
+        };
         
         //display history
         var displayHistory = function(offset){
@@ -210,45 +210,40 @@ return new_board;
         	for(var pos=0; pos<9; pos++){
                 $("#"+pos).html(state[pos]==='*'?'':state[pos]);
         	}
-        }
+        };
         
         //save bot
-        var saveBot = function(){
-            $.ajax({
-            	url: '/Codefu/ttt/save',
-            	type: 'post',
-            	data: {
-            		email: 'shiling.tai@outlook.com',    //TODO: integrate with fb log in
-                    code: editor.getValue()
-            	},
-            	success: function(data){
-            	    console.log('saved. response: ' + data);
-            	}
-            });
-        }
-        
-        //submit bot for tournament
-        var submitBot = function(){
-            $.ajax({
-                url: '/Codefu/ttt/save',
-                type: 'post',
-                data: {
-                    email: 'shiling.tai@outlook.com',    //TODO: integrate with fb log in
-                    code: editor.getValue(),
-                    participate: true
-                },
-                success: function(data){
-                    console.log('saved. response: ' + data);
-                }
-            });
-        }
+        var saveBot = function(participate){
+        	if(userName && userEmail){
+        		$('#saveBtn').attr('disabled','disabled');
+        		$('#submitBtn').attr('disabled','disabled');
+                $.ajax({
+                    url: 'ttt/save',
+                    type: 'post',
+                    data: {
+                        username: userName,
+                        email: userEmail,   
+                        code: editor.getValue(),
+                        participate: participate    //to participate in tournament or not
+                    },
+                    success: function(data){
+                        console.log('saved.');
+                        $('#saveBtn').removeAttr('disabled');
+                        $('#submitBtn').removeAttr('disabled');
+                    }
+                });
+            }else{
+            	//not logged in
+                console.log('not logged in');
+            }
+        };
         
         //event listeners
         $("#testBtn").on('click', testBot);
-        $("#previous").on('click', function(){displayHistory(-1)});
-        $("#next").on('click', function(){displayHistory(1)});
-        $('#saveBtn').on('click', saveBot);
-        $('#submitBtn').on('click', submitBot);
+        $("#previous").on('click', function(){displayHistory(-1);});
+        $("#next").on('click', function(){displayHistory(1);});
+        $('#saveBtn').on('click', function(){saveBot(false);});
+        $('#submitBtn').on('click', function(){saveBot(true);});
         $('#resetBtn').on('click', reset);
         
     </script>	
