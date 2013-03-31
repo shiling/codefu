@@ -15,7 +15,7 @@
                     <li><a id="user-picture"></a></li>
                     <li><a id="user-name"></a></li>
                     <li><a id="user-email"></a></li>
-                    <li><a id="signInBtn" href="" data-toggle="modal" data-target="#myModal">Sign in</a></li>
+                    <li><a id="signInBtn" href="" data-toggle="modal" data-target="#signInModal">Sign in</a></li>
                 </ul>
             </div>
             <!--/.nav-collapse -->
@@ -24,7 +24,7 @@
 </div>
 
 <!-- Sign In Dialog -->
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="signInModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h3 class="modaltemp">Sign in</h3>
@@ -96,7 +96,7 @@
 	        
 	        //hide sign in dom elements
 	        signInButton.style.display="none";
-	        $('#myModal').modal('hide');
+	        $('#signInModal').modal('hide');
 	    }
 	}
         

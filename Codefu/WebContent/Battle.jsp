@@ -234,7 +234,7 @@ return new_board;
                 });
             }else{
             	//not logged in
-                console.log('not logged in');
+            	$('#signInModal').modal('show');
             }
         };
         
