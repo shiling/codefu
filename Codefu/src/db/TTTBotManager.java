@@ -22,7 +22,7 @@ public class TTTBotManager {
 		
 		if(bot==null){	//very first bot, create
 			
-			String query = "INSERT INTO ttt_bots (user_email, code, is_participating) VALUES (?,?,?,?)";
+			String query = "INSERT INTO ttt_bots (user_email, code, is_participating) VALUES (?,?,?)";
 			PreparedStatement ps = conn.prepareStatement(query);
 			ps.setString(1, newBot.getUserEmail());
 			ps.setString(2, newBot.getCode());
