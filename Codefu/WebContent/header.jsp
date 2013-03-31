@@ -78,7 +78,7 @@
                         //user cancelled login or did not grant authorization
                     }
                 }, {scope:'email,user_about_me'});      
-            }
+            };
         }
     }
 	
