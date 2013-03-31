@@ -116,7 +116,7 @@
 				<div class="nav-collapse collapse">
 					<ul class="nav">
 						<li><a href="./Battle.html" class="active">Battle</a></li>
-						<li><a href="./scoreboard.html">Leader Board</a></li>
+						<!--<li><a href="./scoreboard.html">Leader Board</a></li>-->
 					</ul>
 					<ul class="nav pull-right">
 						<li><a id="user-picture"></a></li>
@@ -151,17 +151,17 @@
 				<h1>Battle</h1>
 			</div>
 			<table id="board" class="table table-bordered ttttable">
-				<tr height="100px">
+				<tr height="100px" class="xobutton">
 					<td id="0"></td>
 					<td id="1"></td>
 					<td id="2"></td>
 				</tr>
-				<tr height="100px">
+				<tr height="100px" class="xobutton">
 					<td id="3"></td>
 					<td id="4"></td>
 					<td id="5"></td>
 				</tr>
-				<tr height="100px">
+				<tr height="100px" class="xobutton">
 					<td id="6"></td>
 					<td id="7"></td>
 					<td id="8"></td>
@@ -209,9 +209,9 @@ return new_board;
             </p>
 			<br />
 			<div class="pull-right">
-				<button class="btn btn-success" id="submitBtn">Submit</button>
+				<button class="btn btn-success disabled" id="submitBtn" data-toggle="tooltip" title="Coming Soon">Submit</button>
 				<!--<div class="btn-group dropup">-->
-					<button class="btn btn-warning" id="testBtn">Test</button>
+					<button class="btn btn-warning" id="testBtn">Run</button>
 					<!--<button class="btn dropdown-toggle btn-warning"
 						data-toggle="dropdown">
 						<span class="caret"></span>
@@ -231,11 +231,12 @@ return new_board;
 	&nbsp;&nbsp;
 	<div class="container">
 		<div class="span1"></div>
-		<div id="signInAlert" class="span9 alert">
+		<div id="notloggedinalert"></div>
+		<!--<div id="signInAlert" class="span9 alert">
 			<button type="button" class="close" data-dismiss="alert">&times;</button>
 			<strong>You are not signed in!</strong> Sign in to participate in
 			tournament and have your score registered.
-		</div>
+		</div>-->
 	</div>
 	<br />
 	<div id="results"></div>
@@ -382,7 +383,6 @@ return new_board;
             var s = document.getElementsByTagName('script')[0];
             s.parentNode.insertBefore(ga, s);
         })();
-        
     </script>	
 	
 </body>

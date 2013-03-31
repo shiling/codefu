@@ -7,6 +7,10 @@
  *
  * Designed and built with all the love in the world @twitter by @mdo and @fat.
  */
+.xobutton{
+text-align:center;
+font-size:80px;vertical-align:center;
+}
 .center{
 text-align:center;
 }
@@ -14,7 +18,7 @@ text-align:center;
 margin-top:80px;
 border: 15px solid #575757;
 padding:5px;height:260px;
-overflow:scroll;
+overflow:hidden;
 }
 .profile{
 margin-top:20px;margin-right:50px;
