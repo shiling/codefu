@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<meta charset="utf-8">
 	<title>Battle &middot; Code Kungfu</title>
@@ -9,11 +8,11 @@
 		content="Create your AI and duel with the other player.">
 	<meta name="author" content="Indra Adam">
 	
-	<!-- Styles -->
-	<link rel="stylesheet" href="./styles/bootstrap.css" >
-    <link rel="stylesheet" href="./styles/bootstrap-responsive.min.css">
-	<link rel="stylesheet" href="./styles/codemirror/codemirror.css">
-    <link rel="icon" href="./img/favicon.png" type="image/png" />
+	<!-- Site scripts and styles -->
+	<jsp:include page="include.jsp"/>
+	
+	<!-- Page scripts and styles -->
+    <link rel="stylesheet" href="./styles/codemirror/codemirror.css">
 	<style type="text/css">
 		body {
 	        padding-top: 40px;
@@ -27,124 +26,12 @@
 			background: #e8f2ff !important;
 		}
 	</style>
-	
 </head>
-
 <body>
-
-<!-- FB Login Button -->
-	<div id="fb-root"></div>
-        <script type="text/javascript">
-            var button;
-            var signInButton;
-            var signInAlert;
-            var userName;
-            var userEmail;
-            var userPic;
-            
-            window.fbAsyncInit = function() {
-                FB.init({ appId: '223110031167007', //change the appId to your appId
-                    status: true, 
-                    cookie: true,
-                    xfbml: true,
-                    oauth: true});
-
-               function updateButton(response) {
-                    button       =   document.getElementById('fb-auth');
-                    userName = document.getElementById('user-name');
-                    userEmail = document.getElementById('user-email');
-                    userPic = document.getElementById('user-picture');
-                    signInButton = document.getElementById('signInBtn');
-                    signInAlert = document.getElementById('signInAlert');
-                    
-                    if (response.authResponse) {
-                        //user is already logged in and connected
-                        FB.api('/me', function(info) {
-                            login(response, info);
-                        });
-                        
-                    } else {
-                        //user is not connected to your app or logged out
-                        button.onclick = function() {
-                            FB.login(function(response) {
-                                if (response.authResponse) {
-                                    FB.api('/me', function(info) {
-                                        login(response, info);
-                                    });	   
-                                } else {
-                                    //user cancelled login or did not grant authorization
-                                }
-                            }, {scope:'email,user_about_me'});  	
-                        }
-                    }
-                }
-                
-                // run once with current status and whenever the status changes
-                FB.getLoginStatus(updateButton);
-                FB.Event.subscribe('auth.statusChange', updateButton);	
-            };
-            (function() {
-                var e = document.createElement('script'); e.async = true;
-                e.src = document.location.protocol 
-                    + '//connect.facebook.net/en_US/all.js';
-                document.getElementById('fb-root').appendChild(e);
-            }());
-            
-            
-            function login(response, info){
-                if (response.authResponse) {
-                    isLoggedIn = true;
-                    userName.innerHTML = info.name;
-                    userEmail.innerHTML = info.email;
-                    userPic.innerHTML = '<img src="https://graph.facebook.com/' + info.id + '/picture">';
-                    userEmail.style.display="none";
-                    signInButton.style.display="none";
-                    $('#myModal').modal('hide');
-                    signInAlert.style.display="none";
-                }
-            }
-        
-        </script>
-
-	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container">
-				<a class="btn btn-navbar" data-toggle="collapse"
-					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span>
-				</a> <a class="brand logo" href="./codeKungfu.html">Code Kungfu</a>
-				<div class="nav-collapse collapse">
-					<ul class="nav">
-						<li><a href="./Battle.html" class="active">Battle</a></li>
-						<!--<li><a href="./scoreboard.html">Leader Board</a></li>-->
-					</ul>
-					<ul class="nav pull-right">
-						<li><a id="user-picture"></a></li>
-						<li><a id="user-name"></a></li>
-						<li><a id="user-email"></a></li>
-						<li><a id="signInBtn" href="" data-toggle="modal" data-target="#myModal">Sign in</a></li>
-					</ul>
-					<!--<button type="button" class="btn btn pull-right" data-toggle="modal" data-target="#myModal">Sign in</button>-->
-				</div>
-				<!--/.nav-collapse -->
-			</div>
-		</div>
-	</div>
-	<!-- Modal -->
-	<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal"
-				aria-hidden="true">&times;</button>
-			<h3 class="modaltemp">Sign in</h3>
-		</div>
-		<div class="modal-body">
-			<button id="fb-auth" class="btn btn-primary">Connect with Facebook</button>
-		</div>
-	</div>
-	
-	</div>
-	</div>
+    <!-- Header -->
+    <jsp:include page="header.jsp"/>
+    
+    <!-- Content -->
 	<div class="container">
 		<div class="span4">
 			<div class="hero-unit span2">
@@ -254,10 +141,6 @@ return new_board;
 	</div>
 
     <!-- Scripts -->
-    
-    <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-    <script src="./scripts/jquery.js"></script>
-    <script src="./scripts/bootstrap.min.js"></script>
     <script src="./scripts/codemirror/codemirror.js"></script>
     <script src="./scripts/codemirror/javascript.js"></script>
     <script src="./scripts/codemirror/runmode.js"></script>
@@ -368,22 +251,6 @@ return new_board;
         $('#submitBtn').on('click', submitBot);
         $('#resetBtn').on('click', reset);
         
-        //Google Analytics
-        var _gaq = _gaq || [];
-        _gaq.push([ '_setAccount', 'UA-39614464-1' ]);
-        _gaq.push([ '_trackPageview' ]);
-    
-        (function() {
-            var ga = document.createElement('script');
-            ga.type = 'text/javascript';
-            ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl'
-                    : 'http://www')
-                    + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(ga, s);
-        })();
     </script>	
-	
 </body>
 </html>
