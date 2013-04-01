@@ -147,7 +147,7 @@ return new_board;
     <script src="./scripts/codemirror/active-line.js"></script>
     <script src="./scripts/tictactoe.js"></script>
     <script type="text/javascript">
-            
+        
 		//syntax highlighting
 		CodeMirror.runMode($("#pre-codeTxt").html(), "text/javascript",document.getElementById("pre-codeTxt"));
 		CodeMirror.runMode($("#post-codeTxt").html(), "text/javascript",document.getElementById("post-codeTxt"));
@@ -161,6 +161,20 @@ return new_board;
             extraKeys : {
                 "Enter" : "newlineAndIndentContinueComment"
             }
+        });
+        
+        //get code for logged in users
+        loggedIn.bind('ready', function(){
+            $.ajax({
+                url: 'ttt/get',
+                type: 'post',
+                data: {
+                    email: userEmail,
+                },
+                success: function(data){
+                	editor.setValue(data.code);
+                }
+            });
         });
         
         //test bot

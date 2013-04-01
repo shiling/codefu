@@ -38,6 +38,9 @@
 <div id="fb-root"></div>
 <script type="text/javascript">
 
+	var loggedIn = $({});
+	loggedIn.bind('ready', function(){console.log('logged in!');});
+	
     var userName, userEmail;
     var connectButton = document.getElementById('fb-auth');
 	var signInButton = document.getElementById('signInBtn');
@@ -97,9 +100,12 @@
 	        //hide sign in dom elements
 	        signInButton.style.display="none";
 	        $('#signInModal').modal('hide');
+	        
+	        //do other stuff after logged in
+	        loggedIn.trigger('ready');
 	    }
 	}
-        
+	    
 </script>
 
 <!-- Google Analytics -->

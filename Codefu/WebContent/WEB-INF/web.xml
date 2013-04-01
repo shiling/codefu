@@ -12,4 +12,12 @@
     <servlet-name>tttSave</servlet-name>
     <url-pattern>/ttt/save</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>tttGet</servlet-name>
+    <servlet-class>ttt.GetBotServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>tttGet</servlet-name>
+    <url-pattern>/ttt/get</url-pattern>
+  </servlet-mapping>
 </web-app>
