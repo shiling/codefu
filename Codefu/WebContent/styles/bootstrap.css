@@ -7,10 +7,6 @@
  *
  * Designed and built with all the love in the world @twitter by @mdo and @fat.
  */
-.xobutton{
-text-align:center;
-font-size:80px;vertical-align:center;
-}
 .center{
 text-align:center;
 }
@@ -96,11 +92,30 @@ color:#f0f0f0;
 text-decoration:none
 }
 #outcome{
-width:370px;
+width:46%;
+margin-left:6px;
+margin-right:6px;
+float:left;
 text-align:center;
 }
-.ttttable{
+.batchResult{
+width:30%;
+display:inline;
 text-align:center;
+float:left;
+margin-left:6px;
+margin-right:6px;
+}
+#humanToken{
+text-align:center;
+float:left;
+width:46%;
+margin-left:6px;
+margin-right:6px;
+}
+.batchContainer{
+width:370px;
+display:inline;
 }
 
 .clearfix {
@@ -3960,7 +3975,7 @@ input[type="submit"].btn.btn-mini {
 }
 
 .alert {
-  padding: 8px 35px 8px 14px;
+  padding: 8px 15px 8px 14px;
   margin-bottom: 20px;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
   background-color: #fcf8e3;

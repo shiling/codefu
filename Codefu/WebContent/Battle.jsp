@@ -25,6 +25,13 @@
 		.CodeMirror-activeline-background {
 			background: #e8f2ff !important;
 		}
+		.ttttable td{
+            height: 100px;
+            width: 100px;
+            vertical-align: middle;
+            text-align: center;
+            font-size: 80px;
+		}
 	</style>
 </head>
 <body>
@@ -37,58 +44,77 @@
 			<div class="hero-unit span2">
 				<h1>Battle</h1>
 			</div>
+			<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 			<table id="board" class="table table-bordered ttttable">
-				<tr height="100px" class="xobutton">
+				<tr>
 					<td id="0"></td>
-					<td id="1"></td>
-					<td id="2"></td>
+					<td id="1" ></td>
+					<td id="2" ></td>
 				</tr>
-				<tr height="100px" class="xobutton">
-					<td id="3"></td>
-					<td id="4"></td>
-					<td id="5"></td>
+				<tr>
+					<td id="3" ></td>
+					<td id="4" ></td>
+					<td id="5" ></td>
 				</tr>
-				<tr height="100px" class="xobutton">
-					<td id="6"></td>
-					<td id="7"></td>
-					<td id="8"></td>
+				<tr>
+					<td id="6" ></td>
+					<td id="7" ></td>
+					<td id="8" ></td>
 				</tr>
 			</table>
 			<ul class="pager">
 				<li id="previous" class="previous"><a href="#">&larr;</a></li>
+				<li style="font-size:26pt;">Replay</li>
 				<li id="next" class="next"><a href="#">&rarr;</a></li>
 			</ul>
+			<div class="container batchContainer">
 			<div id="humanToken"></div>
 			<div id="outcome"></div>
+			</div>
+			<div class="container batchContainer">
+            <span id="ratesTxt"></span>
+			<span id="win" class="batchResult"></span>
+			<span id="draw" class="batchResult"></span>
+			<span id="lose" class="batchResult"></span>
+			</div>
 		</div>	
 		<div class="span7">
-		&nbsp;
-			<ul class="nav nav-tabs">
-				<li class="active"><a href="">Tic Tac Toe</a></li>
-			</ul>
-            <p id="pre-codeTxt" class="cm-s-default" style="font-family:'Lucida Console'; font-size:12">
-// FUNCTION THAT MAKES A MOVE
+		</p>
+			<p id="pre-codeTxt" class="cm-s-default" style="font-family:'Lucida Console'; font-size:12">
+/*******************************************************************
+ INSTRUCTIONS:
+ Implement a Tic Tac Toe bot that makes a move when given the game board in the function below.
+ Your bot will be randomly assigned to player 'x' or 'o' and will be played alternatively with another bot in our system.
+ Your bot has to create new_board containing the move that it wants to make.
+ All the best! 
 
-// PARAMETERS:
-// - token: player the bot is player, 'x' or 'o'
-// - board: current state of the board, e.g. '****x***o' represents a board with 'x' in the center and 'o' in the bottom right corner
+ PARAMETERS:
+ - token: player your bot is assigned to, 'x' or 'o'
+ - board: current state of the board, e.g. '****x***o' represents a board with 'x' in the center and 'o' in the bottom right corner
 
-// RETURNS:
-// - new_board: board with the new move, e.g. '****x*x*o'
-
+ RETURN:
+ - new_board: board with your bot's new move, e.g. '****x*x*o'
+*******************************************************************/
 function get_next_move(token, board){
             </p>
 			<textarea id="codeTxt" rows="15" class="span7 playarea">
-//replace this sample code with your own code!
-//sample code: a dumb AI that places its token in any random spot that is empty
-var retry = true;
-while(retry){
-  var tryPos = Math.floor(Math.random() * 9);
-  if(board[tryPos] == '*'){
-    new_board = board.substr(0, tryPos) + token + board.substr(tryPos + 1);
-    retry = false;
+//replace this sample code with your own code! 
+
+//this is a dumb AI that places its token in any random spot that is empty
+
+while(true){    //keep looping until bot finds a nice empty spot
+  var randomSpot = Math.floor(Math.random() * 9);   //try a random spot
+  if(board[randomSpot] == '*'){ //check if random spot is empty
+    //hurray! the spot is empty! 
+    //create new_board with the bot's token in chosen spot
+    new_board = board.substr(0, randomSpot) + token 
+        + board.substr(randomSpot + 1);
+    break;  //found a spot, stop the search loop 
   }
-}
+}           
+
+//now, try making a smarter bot!
+//hint: try taking the center spot if it is empty ;)
 			</textarea>
 			<p id="post-codeTxt" class="cm-s-default" style="font-family:'Lucida Console'; font-size:12">            
 return new_board;
@@ -96,8 +122,9 @@ return new_board;
             </p>
 			<br />
 			<div class="pull-right">
-				<button class="btn btn-success disabled" id="submitBtn" data-toggle="tooltip" title="Coming Soon">Submit</button>
+				<!--<button class="btn btn-success disabled" id="submitBtn" data-toggle="tooltip" title="Coming Soon">Submit</button>-->
 				<!--<div class="btn-group dropup">-->
+					<div class="fb-like" data-href="http://codefu-5euzxjdg6b.elasticbeanstalk.com " data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div>
 					<button class="btn btn-warning" id="testBtn">Run</button>
 					<!--<button class="btn dropdown-toggle btn-warning"
 						data-toggle="dropdown">
@@ -106,7 +133,7 @@ return new_board;
 					<ul class="dropdown-menu">
 						<li><a tabindex="-1" href="">Easy</a></li>
 						<li><a tabindex="-1" href="">Medium</a></li>
-						<li><a tabindex="-1" href="">Hard</a></li>
+						<li><a tabindex="-1" href="">Hard</a></li>    
 					</ul>
 				</div>-->
 				<!--<button id="reseBtn" class="btn btn-danger">Reset</button>-->
@@ -178,10 +205,23 @@ return new_board;
         });
         
         //test bot
-        var testBot = function() {
+        var testBot = function(numTrials) {
             var t3 = new tictactoe();
-            var results = $.parseJSON(t3.run_bot(editor.getValue()));
-            displayResults(results);
+            var result = $.parseJSON(t3.run_bot(editor.getValue(), numTrials));
+            displayResults(result);
+        }
+        
+        //test bot til lose
+        var testBotTilLose = function() {
+            var t3 = new tictactoe();
+            var result;
+            while(true){
+                result = $.parseJSON(t3.run_bot(editor.getValue(), 1));
+                if(result.loseCount===1){
+                    break;
+                }
+            }
+            displayResults(result);
         }
         
         //display results of test bot
@@ -192,7 +232,10 @@ return new_board;
         	displayHistory();
         	
         	//display outcome message
-        	if(results.outcome==='-'){
+        	if(results.error){ //there is an error!
+        		$("#outcome").html("<div class='alert alert-danger'><strong>Error!</strong></div>");
+        	}
+        	else if(results.outcome==='-'){
                 $("#outcome").html("<div class='alert alert-warning'><strong>Draw!</strong></div>");
         	}else if((results.outcome==='x' && results.x==='human') || (results.outcome==='o' && results.o==='human')){
                 $("#outcome").html("<div class='alert alert-success'><strong>You Win!</strong></div>");
@@ -200,11 +243,17 @@ return new_board;
                 $("#outcome").html("<div class='alert alert-danger'><strong>You Lose!</strong></div>");
         	}
         	
+        	//display which player the bot is 
         	if(results.x === 'human'){
         		 $("#humanToken").html("<div class='alert alert-info center'><strong>You are X</strong></div>");
         	}else{
         		$("#humanToken").html("<div class='alert alert-info center'><strong>You are O</strong></div>");
         	}
+        	//display batch statistics
+        	$("#ratesTxt").html("<h4>Chances of:</h4>");
+        	$("#draw").html("<div class='alert alert-warning'><strong>Draw: "+results.drawCount+"%</strong></div>");
+        	$("#lose").html("<div class='alert alert-danger'><strong>Lose: "+results.loseCount+"%</strong></div>");
+        	$("#win").html("<div class='alert alert-success'><strong>Win: "+results.winCount+"%</strong></div>");
         };
         
         //display history
@@ -253,7 +302,7 @@ return new_board;
         };
         
         //event listeners
-        $("#testBtn").on('click', testBot);
+        $("#testBtn").on('click', function(){testBot(1000);});
         $("#previous").on('click', function(){displayHistory(-1);});
         $("#next").on('click', function(){displayHistory(1);});
         $('#saveBtn').on('click', function(){saveBot(false);});

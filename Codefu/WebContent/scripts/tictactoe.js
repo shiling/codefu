@@ -2,14 +2,13 @@ function tictactoe(){
 	
 	//dumb AI that places its token in any random spot that is empty
 	this.ai_get_next_move = function(token, board){
-		var retry = true;
-		while(retry){
-			var tryPos = Math.floor(Math.random() * 9);
-			if(board[tryPos] == '*'){	//position is empty
-				board = board.substr(0, tryPos) + token + board.substr(tryPos + 1);	//insert own token
-				retry = false;
+		while(true){    
+			var randomSpot = Math.floor(Math.random() * 9);   
+			if(board[randomSpot] == '*'){ 
+				board = board.substr(0, randomSpot) + token + board.substr(randomSpot + 1);
+				break; 
 			}
-		}
+		}    
 		return board;
 	};
 	
@@ -120,35 +119,60 @@ function tictactoe(){
 	};
 	
 	//takes in a player bot code and runs it against AI bot
-	this.run_bot = function(get_next_move_body){
-		
+	this.run_bot = function(get_next_move_body, numTrials){
+				
 		//create player bot
 		get_next_move_body += "return new_board;";
 		var get_next_move = new Function('token','board', get_next_move_body);
 	
-		//randomly assign bot to 'x' or 'o'
-		var human = Math.random()<0.5?'x':'o';
-		if(human==='x'){
-			this.x_get_next_move = function(board){	//assign player bot
-				return get_next_move('x',board);
-			};
-			this.o_get_next_move = function(board){	//assign ai bot
-				return this.ai_get_next_move('o',board);
-			};
-		}else{
-			this.o_get_next_move = function(board){	//assign player bot
-				return get_next_move('o',board);
-			};
-			this.x_get_next_move = function(board){	//assign ai bot
-				return this.ai_get_next_move('x',board);
-			};
+		//run numTrials trials of the game
+		var winCount = 0, loseCount = 0, drawCount = 0;
+		var result;
+		for(var i=0; i<numTrials; i++){
+			
+			//randomly assign bot to 'x' or 'o'
+			var human = Math.random()<0.5?'x':'o';
+			if(human==='x'){
+				this.x_get_next_move = function(board){	//assign player bot
+					return get_next_move('x',board);
+				};
+				this.o_get_next_move = function(board){	//assign ai bot
+					return this.ai_get_next_move('o',board);
+				};
+			}else{
+				this.o_get_next_move = function(board){	//assign player bot
+					return get_next_move('o',board);
+				};
+				this.x_get_next_move = function(board){	//assign ai bot
+					return this.ai_get_next_move('x',board);
+				};
+			}
+			
+			//run the game
+			result = JSON.parse(this.run());
+			result.x = human==='x'?'human':'computer';
+			result.o = human==='o'?'human':'computer';
+			
+			//stop if there is an error
+			if(result.error){
+				break;
+			}
+			
+			//
+			if(result.outcome==='-'){
+				drawCount++;
+			}else if((result.x==='human' && result.outcome === 'x')||(result.o==='human' && result.outcome === 'o')){
+				winCount++;
+			}else{
+				loseCount++;
+			}
 		}
+		result.winCount = Math.floor(winCount / numTrials * 100);
+		result.loseCount = Math.ceil(loseCount / numTrials * 100);
+		result.drawCount = Math.ceil(drawCount / numTrials * 100);
+		console.log("win: " + winCount + "; lose: " + loseCount + "; draw: " + drawCount);
 		
-		//run the game
-		var results = JSON.parse(this.run());
-		results.x = human==='x'?'human':'computer';
-		results.o = human==='o'?'human':'computer';
-		return JSON.stringify(results);
+		return JSON.stringify(result);
 	
 	};
 	
